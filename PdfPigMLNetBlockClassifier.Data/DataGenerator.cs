@@ -16,7 +16,7 @@ namespace PdfPigMLNetBlockClassifier.Data
     public static class DataGenerator
     {
         public static readonly string OutputFolderPath = @"../../../data";
-        private static readonly string header = "charsCount,pctNumericChars,pctAlphabeticalChars,pctSymbolicChars,pctBulletChars,deltaToHeight,pathsCount,pctBezierPaths,pctHorPaths,pctVertPaths,pctOblPaths,imagesCount,imageAvgProportion";
+        private static readonly string header = "charsCount,pctNumericChars,pctAlphabeticalChars,pctSymbolicChars,pctBulletChars,deltaToHeight,pathsCount,pctBezierPaths,pctHorPaths,pctVertPaths,pctOblPaths,imagesCount,imageAvgProportion,label";
 
         /// <summary>
         /// Generate a csv file of features. You will need the pdf documents and the ground truths in PAGE xml format.
