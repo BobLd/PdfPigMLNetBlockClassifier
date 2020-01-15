@@ -64,3 +64,12 @@ across all the features of a model, one after another. - [Source]( https://docs.
 |**pctOblPaths**          |% of oblique paths|-0.0005032 |0.00003612 |
 |**pctBezierPaths**       |% of Bezier curve paths|-0.00007828 |0.00001563 |
 |**imagesCount**          |Images count|-0.00002796 |0.00002768 |
+
+# TO DO
+## Features
+- Add a [decoration](https://github.com/UglyToad/PdfPig/blob/master/src/UglyToad.PdfPig.DocumentLayoutAnalysis/DecorationTextBlockClassifier.cs) score/flag
+- Add block's number of line, [cf.](http://www.cs.rug.nl/~aiellom/publications/ijdar.pdf)
+- Add block's aspect ratio: the ratio between width and height of the bounding box, [cf.](http://www.cs.rug.nl/~aiellom/publications/ijdar.pdf)
+- Add block's area ratio: the ratio between block area and the page area, [cf.](http://www.cs.rug.nl/~aiellom/publications/ijdar.pdf)
+- Add block's font style: an enumerated type, with possible values: regular, bold, italic, underline, [cf.](http://www.cs.rug.nl/~aiellom/publications/ijdar.pdf)
+- Use [bookmarks](https://github.com/UglyToad/PdfPig/blob/master/src/UglyToad.PdfPig/Outline/BookmarksProvider.cs) when available with minimum edit distance score
