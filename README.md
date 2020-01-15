@@ -5,6 +5,8 @@ The objective is to classify each text block in a pdf document page as either __
 [AutoML](https://docs.microsoft.com/en-us/dotnet/machine-learning/automate-training-with-model-builder) model builder was used. The model was
 trained on a subset of the [PubLayNet](https://github.com/ibm-aur-nlp/PubLayNet#getting-data) dataset. See their license [here](https://cdla.io/permissive-1-0/).
 
+# Results
+Results are based on PubLayNet's validation dataset, where the page segmentation is known. For real life use, a page segmenter will be needed (see PdfPig's [PageSegmenters](https://github.com/UglyToad/PdfPig/tree/master/src/UglyToad.PdfPig.DocumentLayoutAnalysis/PageSegmenter)). The quality of the page segmentation  will impact the results.
 ## Metrics for multi-class classification model
 ```
 MicroAccuracy = 0.9369, a value between 0 and 1, the closer to 1, the better
