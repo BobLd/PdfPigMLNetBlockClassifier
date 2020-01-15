@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="data\features_train.csv" />
+    <None Remove="data\features_val.csv" />
+    <None Remove="data\invalide_pdfs_features_train.txt" />
+    <None Remove="data\invalide_pdfs_features_val.txt" />
+    <None Remove="model\model.zip" />
+    <None Remove="model\results.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="model\" />
+    <Folder Include="data\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="PdfPig" Version="0.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PdfPigMLNetBlockClassifier.Data\PdfPigMLNetBlockClassifier.Data.csproj" />
+    <ProjectReference Include="..\PdfPigMLNetBlockClassifier.LightGbm\PdfPigMLNetBlockClassifier.LightGbm.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="sample.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

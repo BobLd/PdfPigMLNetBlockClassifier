@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.852
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PdfPigMLNetBlockClassifier", "PdfPigMLNetBlockClassifier\PdfPigMLNetBlockClassifier.csproj", "{1B5DA09B-E217-40C6-80CB-3BBA28F5AF39}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PdfPigMLNetBlockClassifier.LightGbm", "PdfPigMLNetBlockClassifier.LightGbm\PdfPigMLNetBlockClassifier.LightGbm.csproj", "{42436C8B-339F-4020-A52D-F6787C267483}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PdfPigMLNetBlockClassifier.Data", "PdfPigMLNetBlockClassifier.Data\PdfPigMLNetBlockClassifier.Data.csproj", "{D4147008-F6C7-4528-9621-219F41BC12DB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1B5DA09B-E217-40C6-80CB-3BBA28F5AF39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B5DA09B-E217-40C6-80CB-3BBA28F5AF39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B5DA09B-E217-40C6-80CB-3BBA28F5AF39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B5DA09B-E217-40C6-80CB-3BBA28F5AF39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42436C8B-339F-4020-A52D-F6787C267483}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42436C8B-339F-4020-A52D-F6787C267483}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42436C8B-339F-4020-A52D-F6787C267483}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42436C8B-339F-4020-A52D-F6787C267483}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4147008-F6C7-4528-9621-219F41BC12DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4147008-F6C7-4528-9621-219F41BC12DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4147008-F6C7-4528-9621-219F41BC12DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4147008-F6C7-4528-9621-219F41BC12DB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {91D33AE2-5546-4275-B7C7-3B029863A3FB}
+	EndGlobalSection
+EndGlobal

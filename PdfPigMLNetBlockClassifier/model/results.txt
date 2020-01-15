@@ -1,0 +1,66 @@
+=============== Cross-validating to get model's accuracy metrics ===============
+*************************************************************************************************************
+*       Metrics for Multi-class Classification model
+*------------------------------------------------------------------------------------------------------------
+*       Average MicroAccuracy:    0.931  - Standard deviation: (.001)  - Confidence Interval 95%: (.001)
+*       Average MacroAccuracy:    0.743  - Standard deviation: (.001)  - Confidence Interval 95%: (.001)
+*       Average LogLoss:          .219  - Standard deviation: (.002)  - Confidence Interval 95%: (.002)
+*       Average LogLossReduction: .747  - Standard deviation: (.003)  - Confidence Interval 95%: (.003)
+*************************************************************************************************************
+=============== Training  model ===============
+=============== End of training process ===============
+=============== Saving the model  ===============
+The model is saved to ../../../model\model.zip
+=============== Evaluating to get model's accuracy metrics ===============
+************************************************************
+*    Metrics for multi-class classification model
+*-----------------------------------------------------------
+    MacroAccuracy = 0.7482, a value between 0 and 1, the closer to 1, the better
+    MicroAccuracy = 0.9369, a value between 0 and 1, the closer to 1, the better
+    LogLoss = 0.2092, the closer to 0, the better
+    LogLoss for class 1         = 0.2156, the closer to 0, the better
+    LogLoss for class 2         = 3.1245, the closer to 0, the better
+    LogLoss for class 3         = 0.306, the closer to 0, the better
+    LogLoss for class 4         = 0.1094, the closer to 0, the better
+    LogLoss for class 5         = 0.2472, the closer to 0, the better
+
+Confusion table
+          ||========================================
+PREDICTED ||     0 |     1 |     2 |     3 |     4 | Recall
+TRUTH     ||========================================
+        0 || 1,765 |     0 |     0 |   145 |     2 | 0.9231
+        1 ||     1 |     3 |     2 |   273 |     0 | 0.0108
+        2 ||     0 |     0 |   623 |    63 |     5 | 0.9016
+        3 ||   242 |     0 |    13 | 8,709 |     1 | 0.9714
+        4 ||     1 |     0 |     2 |     2 |    71 | 0.9342
+          ||========================================
+Precision ||0.8785 |1.0000 |0.9734 |0.9475 |0.8987 |
+
+    F1 Score for class 1        = 0.9003, a value between 0 and 1, the closer to 1, the better
+    F1 Score for class 2        = 0.0213, a value between 0 and 1, the closer to 1, the better
+    F1 Score for class 3        = 0.9361, a value between 0 and 1, the closer to 1, the better
+    F1 Score for class 4        = 0.9593, a value between 0 and 1, the closer to 1, the better
+    F1 Score for class 5        = 0.9161, a value between 0 and 1, the closer to 1, the better
+************************************************************
+=============== Permutation Feature Importance ===============
+PFI works by taking a labeled dataset, choosing a feature, and permuting the values for that
+feature across all the examples, so that each example now has a random value for the feature
+and the original values for all other features. The evaluation metric(e.g.micro - accuracy) is
+then calculated for this modified dataset, and the change in the evaluation metric from the
+original dataset is computed.The larger the change in the evaluation metric, the more
+important the feature is to the model. PFI works by performing this permutation analysis
+across all the features of a model, one after another.
+Feature Change in MicroAccuracy 95% Confidence in the Mean Change in MicroAccuracy
+charsCount      -0.2192 0.0008443
+pctNumericChars -0.04996        0.0004363
+deltaToHeight   -0.04155        0.000428
+pctBulletChars  -0.01571        0.0004034
+pctAlphabeticalChars    -0.012  0.0003245
+pctSymbolicChars        -0.01187        0.0004204
+pathsCount      -0.01089        0.0002144
+pctHorPaths     -0.002695       0.0001318
+imageAvgProportion      -0.001895       3.909E-05
+pctVertPaths    -0.001403       0.0001069
+pctOblPaths     -0.0005032      3.612E-05
+pctBezierPaths  -7.828E-05      1.563E-05
+imagesCount     -2.796E-05      2.768E-05
