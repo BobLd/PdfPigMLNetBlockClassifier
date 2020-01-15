@@ -47,18 +47,18 @@ original dataset is computed. The larger the change in the evaluation metric, th
 important the feature is to the model. PFI works by performing this permutation analysis
 across all the features of a model, one after another. - [Source]( https://docs.microsoft.com/en-us/dotnet/api/microsoft.ml.permutationfeatureimportanceextensions.permutationfeatureimportance?view=ml-dotnet#Microsoft_ML_PermutationFeatureImportanceExtensions_PermutationFeatureImportance__1_Microsoft_ML_MulticlassClassificationCatalog_Microsoft_ML_ISingleFeaturePredictionTransformer___0__Microsoft_ML_IDataView_System_String_System_Boolean_System_Nullable_System_Int32__System_Int32_)
 
-|Feature              | Change in MicroAccuracy | 95% Confidence in the Mean Change in MicroAccuracy |
-|--------------------:|:-----------------------:|:--------------------------------------------------:|
-|charsCount           |-0.2192                  |0.0008443                                           |
-|pctNumericChars      |-0.04996                 |0.0004363                                           |
-|deltaToHeight        |-0.04155                 |0.000428                                            |
-|pctBulletChars       |-0.01571                 |0.0004034                                           |
-|pctAlphabeticalChars |-0.012                   |0.0003245                                           |
-|pctSymbolicChars     |-0.01187                 |0.0004204                                           |
-|pathsCount           |-0.01089                 |0.0002144                                           |
-|pctHorPaths          |-0.002695                |0.0001318                                           |
-|imageAvgProportion   |-0.001895                |0.00003909                                          |
-|pctVertPaths         |-0.001403                |0.0001069                                           |
-|pctOblPaths          |-0.0005032               |0.00003612                                          |
-|pctBezierPaths       |-0.00007828              |0.00001563                                          |
-|imagesCount          |-0.00002796              |0.00002768                                          |
+|Feature              |Description| Change in MicroAccuracy | 95% Confidence in the Mean Change in MicroAccuracy |
+|--------------------:|-----------|:-----------------------:|:--------------------------------------------------:|
+|charsCount           |Characters count|-0.2192                  |0.0008443                                     |
+|pctNumericChars      |% of numeric characters|-0.04996                 |0.0004363                                           |
+|deltaToHeight        |Average delta to average page glyph height|-0.04155                 |0.000428|
+|pctBulletChars       |% of bullet characters|-0.01571                 |0.0004034|
+|pctAlphabeticalChars |% of alphabetical characters|-0.012                   |0.0003245                                           |
+|pctSymbolicChars     |% of symbolic characters|-0.01187                 |0.0004204                                           |
+|pathsCount           |Paths count|-0.01089                 |0.0002144                                           |
+|pctHorPaths          |% of horizontal paths|-0.002695                |0.0001318                                           |
+|imageAvgProportion   |Average area covered by images|-0.001895                |0.00003909                                          |
+|pctVertPaths         |% of vertical paths|-0.001403                |0.0001069                                           |
+|pctOblPaths          |% of oblique paths|-0.0005032               |0.00003612                                          |
+|pctBezierPaths       |% of Bezier curve paths|-0.00007828              |0.00001563                                          |
+|imagesCount          |Images count|-0.00002796              |0.00002768                                          |
