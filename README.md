@@ -11,30 +11,30 @@ MicroAccuracy = 0.9369, a value between 0 and 1, the closer to 1, the better
 MacroAccuracy = 0.7482, a value between 0 and 1, the closer to 1, the better
 LogLoss = 0.2092, the closer to 0, the better
 
-LogLoss for class 0         = 0.2156, the closer to 0, the better
-LogLoss for class 1         = 3.1245, the closer to 0, the better
-LogLoss for class 2         = 0.3060, the closer to 0, the better
-LogLoss for class 3         = 0.1094, the closer to 0, the better
-LogLoss for class 4         = 0.2472, the closer to 0, the better
+LogLoss for class 0 (title)        = 0.2156, the closer to 0, the better
+LogLoss for class 1 (list)         = 3.1245, the closer to 0, the better
+LogLoss for class 2 (table)        = 0.3060, the closer to 0, the better
+LogLoss for class 3 (text)         = 0.1094, the closer to 0, the better
+LogLoss for class 4 (image)        = 0.2472, the closer to 0, the better
 
-F1 Score for class 0        = 0.9003, a value between 0 and 1, the closer to 1, the better
-F1 Score for class 1        = 0.0213, a value between 0 and 1, the closer to 1, the better
-F1 Score for class 2        = 0.9361, a value between 0 and 1, the closer to 1, the better
-F1 Score for class 3        = 0.9593, a value between 0 and 1, the closer to 1, the better
-F1 Score for class 4        = 0.9161, a value between 0 and 1, the closer to 1, the better
+F1 Score for class 0 (title)       = 0.9003, a value between 0 and 1, the closer to 1, the better
+F1 Score for class 1 (list)        = 0.0213, a value between 0 and 1, the closer to 1, the better
+F1 Score for class 2 (table)       = 0.9361, a value between 0 and 1, the closer to 1, the better
+F1 Score for class 3 (text)        = 0.9593, a value between 0 and 1, the closer to 1, the better
+F1 Score for class 4 (image)       = 0.9161, a value between 0 and 1, the closer to 1, the better
 ```
 
 ## Confusion table
 ```
-          ||========================================
-PREDICTED ||     0 |     1 |     2 |     3 |     4 | Recall
-TRUTH     ||========================================
-        0 || 1,765 |     0 |     0 |   145 |     2 | 0.9231
-        1 ||     1 |     3 |     2 |   273 |     0 | 0.0108
-        2 ||     0 |     0 |   623 |    63 |     5 | 0.9016
-        3 ||   242 |     0 |    13 | 8,709 |     1 | 0.9714
-        4 ||     1 |     0 |     2 |     2 |    71 | 0.9342
-          ||========================================
+          ||=======================================================
+PREDICTED ||     0 |     1 |     2 |     3 |     4 | Recall | Total
+TRUTH     ||=======================================================
+(title) 0 || 1,765 |     0 |     0 |   145 |     2 | 0.9231 | 1,912
+(list)  1 ||     1 |     3 |     2 |   273 |     0 | 0.0108 | 279
+(table) 2 ||     0 |     0 |   623 |    63 |     5 | 0.9016 | 691
+(text)  3 ||   242 |     0 |    13 | 8,709 |     1 | 0.9714 | 8,965
+(image) 4 ||     1 |     0 |     2 |     2 |    71 | 0.9342 | 76
+          ||=======================================================
 Precision ||0.8785 |1.0000 |0.9734 |0.9475 |0.8987 |
 ```
 
