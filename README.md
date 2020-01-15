@@ -1,6 +1,6 @@
 # PdfPig ML.Net Block Classifier
 Proof of concept of training a simple Region Classifier using [PdfPig](https://github.com/UglyToad/PdfPig) and [ML.NET](https://github.com/dotnet/machinelearning). 
-The objective is to classify each text block in a pdf document page as either __title__, __text__, __list__, __table__ and __image__.
+The objective is to classify each text block in a __pdf document__ page as either __title__, __text__, __list__, __table__ and __image__.
 
 [AutoML](https://docs.microsoft.com/en-us/dotnet/machine-learning/automate-training-with-model-builder) model builder was used. The model was
 trained on a subset of the [PubLayNet](https://github.com/ibm-aur-nlp/PubLayNet#getting-data) dataset. See their license [here](https://cdla.io/permissive-1-0/).
