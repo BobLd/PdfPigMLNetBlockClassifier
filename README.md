@@ -49,8 +49,10 @@ original dataset is computed. The larger the change in the evaluation metric, th
 important the feature is to the model. PFI works by performing this permutation analysis
 across all the features of a model, one after another. - [Source]( https://docs.microsoft.com/en-us/dotnet/api/microsoft.ml.permutationfeatureimportanceextensions.permutationfeatureimportance?view=ml-dotnet#Microsoft_ML_PermutationFeatureImportanceExtensions_PermutationFeatureImportance__1_Microsoft_ML_MulticlassClassificationCatalog_Microsoft_ML_ISingleFeaturePredictionTransformer___0__Microsoft_ML_IDataView_System_String_System_Boolean_System_Nullable_System_Int32__System_Int32_)
 
-|Feature              |Description| Change in MicroAccuracy | 95% Confidence in the Mean Change in MicroAccuracy |
-|--------------------:|:-----------:|:-----------------------:|:--------------------------------------------------:|
+### Micro Accuracy
+
+|Feature                  | Description | Change in MicroAccuracy | 95% Confidence in the Mean Change in MicroAccuracy |
+|------------------------:|:-----------:|:-----------------------:|:--------------------------------------------------:|
 |**charsCount**           |Characters count|-0.2192 |0.0008443 |
 |**pctNumericChars**      |% of numeric characters|-0.04996 |0.0004363 |
 |**deltaToHeight**        |Average delta to average page glyph height|-0.04155 |0.000428|
@@ -64,6 +66,24 @@ across all the features of a model, one after another. - [Source]( https://docs.
 |**pctOblPaths**          |% of oblique paths|-0.0005032 |0.00003612 |
 |**pctBezierPaths**       |% of Bezier curve paths|-0.00007828 |0.00001563 |
 |**imagesCount**          |Images count|-0.00002796 |0.00002768 |
+
+### Macro Accuracy 
+
+|Feature                  | Description | Change in MacroAccuracy | 95% Confidence in the Mean Change in MacroAccuracy |
+|------------------------:|:-----------:|:-----------------------:|:--------------------------------------------------:|
+|**charsCount**           |Characters count|-0.1906 |0.001906|
+|**pathsCount**           |Paths count|-0.07355 |0.001211|
+|**pctNumericChars**      |% of numeric characters|-0.06516 |0.0008356|
+|**deltaToHeight**        |Average delta to average page glyph height|-0.05476 |0.001333|
+|**pctOblPaths**          |% of oblique paths|-0.01097 |0.0002006|
+|**pctAlphabeticalChars** |% of alphabetical characters|-0.009334 |0.001237|
+|**imageAvgProportion**   |Average area covered by images|-0.00874 |0.0001771|
+|**pctVertPaths**         |% of vertical paths|-0.005001 |0.0003568|
+|**pctHorPaths**          |% of horizontal paths|-0.004718 |0.0004244|
+|**pctSymbolicChars**     |% of symbolic characters|-0.001522 |0.0008552|
+|**pctBulletChars**       |% of bullet characters|0.0009088 |0.0007747|
+|**pctBezierPaths**       |% of Bezier curve paths|-0.0003737 |0.00005705|
+|**imagesCount**          |Images count|-0.00003805 |0.00003434|
 
 # TO DO
 ## Features
