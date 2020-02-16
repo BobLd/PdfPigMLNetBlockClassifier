@@ -50,17 +50,34 @@ then calculated for this modified dataset, and the change in the evaluation metr
 original dataset is computed.The larger the change in the evaluation metric, the more
 important the feature is to the model. PFI works by performing this permutation analysis
 across all the features of a model, one after another.
-Feature Change in MicroAccuracy 95% Confidence in the Mean Change in MicroAccuracy
-charsCount      -0.2192 0.0008443
-pctNumericChars -0.04996        0.0004363
-deltaToHeight   -0.04155        0.000428
-pctBulletChars  -0.01571        0.0004034
-pctAlphabeticalChars    -0.012  0.0003245
-pctSymbolicChars        -0.01187        0.0004204
-pathsCount      -0.01089        0.0002144
-pctHorPaths     -0.002695       0.0001318
-imageAvgProportion      -0.001895       3.909E-05
-pctVertPaths    -0.001403       0.0001069
-pctOblPaths     -0.0005032      3.612E-05
-pctBezierPaths  -7.828E-05      1.563E-05
-imagesCount     -2.796E-05      2.768E-05
+
+Feature 				Change in MicroAccuracy 	95% Confidence in the Mean Change in MicroAccuracy
+charsCount      		-0.2192 					0.0008443
+pctNumericChars 		-0.04996        			0.0004363
+deltaToHeight   		-0.04155        			0.000428
+pctBulletChars  		-0.01571        			0.0004034
+pctAlphabeticalChars	-0.012  					0.0003245
+pctSymbolicChars        -0.01187        			0.0004204
+pathsCount      		-0.01089        			0.0002144
+pctHorPaths     		-0.002695       			0.0001318
+imageAvgProportion      -0.001895       			3.909E-05
+pctVertPaths    		-0.001403       			0.0001069
+pctOblPaths     		-0.0005032      			3.612E-05
+pctBezierPaths  		-7.828E-05      			1.563E-05
+imagesCount     		-2.796E-05      			2.768E-05
+
+
+Feature 				Change in MacroAccuracy 	95% Confidence in the Mean Change in MacroAccuracy
+charsCount      		-0.1906 					0.001906
+pathsCount      		-0.07355        			0.001211
+pctNumericChars 		-0.06516        			0.0008356
+deltaToHeight   		-0.05476        			0.001333
+pctOblPaths     		-0.01097        			0.0002006
+pctAlphabeticalChars    -0.009334       			0.001237
+imageAvgProportion      -0.00874        			0.0001771
+pctVertPaths    		-0.005001       			0.0003568
+pctHorPaths     		-0.004718       			0.0004244
+pctSymbolicChars        -0.001522       			0.0008552
+pctBulletChars  		0.0009088       			0.0007747
+pctBezierPaths  		-0.0003737      			5.705E-05
+imagesCount     		-3.805E-05      			3.434E-05

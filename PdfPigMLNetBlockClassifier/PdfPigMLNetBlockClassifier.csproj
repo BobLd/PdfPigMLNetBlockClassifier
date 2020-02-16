@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PdfPigMLNetBlockClassifier.Data\PdfPigMLNetBlockClassifier.Data.csproj" />
+    <ProjectReference Include="..\PdfPigMLNetBlockClassifier.LightGbmV2\PdfPigMLNetBlockClassifier.LightGbmV2.csproj" />
     <ProjectReference Include="..\PdfPigMLNetBlockClassifier.LightGbm\PdfPigMLNetBlockClassifier.LightGbm.csproj" />
   </ItemGroup>
 

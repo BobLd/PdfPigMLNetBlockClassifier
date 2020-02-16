@@ -5,7 +5,7 @@ using UglyToad.PdfPig.Content;
 using UglyToad.PdfPig.Core;
 using static UglyToad.PdfPig.Core.PdfPath;
 
-namespace PdfPigMLNetBlockClassifier.Data
+namespace PdfPigMLNetBlockClassifier.Data.v1
 {
     public static class FeatureHelper
     {

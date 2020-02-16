@@ -1,5 +1,5 @@
 ﻿using Microsoft.ML;
-using PdfPigMLNetBlockClassifier.Data;
+using PdfPigMLNetBlockClassifier.Data.v1;
 using System.Collections.Generic;
 using System.Linq;
 using UglyToad.PdfPig.Content;

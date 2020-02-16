@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.852
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PdfPigMLNetBlockClassifier", "PdfPigMLNetBlockClassifier\PdfPigMLNetBlockClassifier.csproj", "{1B5DA09B-E217-40C6-80CB-3BBA28F5AF39}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PdfPigMLNetBlockClassifier", "PdfPigMLNetBlockClassifier\PdfPigMLNetBlockClassifier.csproj", "{1B5DA09B-E217-40C6-80CB-3BBA28F5AF39}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PdfPigMLNetBlockClassifier.LightGbm", "PdfPigMLNetBlockClassifier.LightGbm\PdfPigMLNetBlockClassifier.LightGbm.csproj", "{42436C8B-339F-4020-A52D-F6787C267483}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PdfPigMLNetBlockClassifier.LightGbm", "PdfPigMLNetBlockClassifier.LightGbm\PdfPigMLNetBlockClassifier.LightGbm.csproj", "{42436C8B-339F-4020-A52D-F6787C267483}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PdfPigMLNetBlockClassifier.Data", "PdfPigMLNetBlockClassifier.Data\PdfPigMLNetBlockClassifier.Data.csproj", "{D4147008-F6C7-4528-9621-219F41BC12DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PdfPigMLNetBlockClassifier.Data", "PdfPigMLNetBlockClassifier.Data\PdfPigMLNetBlockClassifier.Data.csproj", "{D4147008-F6C7-4528-9621-219F41BC12DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PdfPigMLNetBlockClassifier.LightGbmV2", "PdfPigMLNetBlockClassifier.LightGbmV2\PdfPigMLNetBlockClassifier.LightGbmV2.csproj", "{3267E733-7D48-4A11-AB73-1261ACBC8681}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{D4147008-F6C7-4528-9621-219F41BC12DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D4147008-F6C7-4528-9621-219F41BC12DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D4147008-F6C7-4528-9621-219F41BC12DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3267E733-7D48-4A11-AB73-1261ACBC8681}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3267E733-7D48-4A11-AB73-1261ACBC8681}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3267E733-7D48-4A11-AB73-1261ACBC8681}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3267E733-7D48-4A11-AB73-1261ACBC8681}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

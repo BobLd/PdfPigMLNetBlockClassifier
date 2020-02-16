@@ -1,13 +1,12 @@
 ﻿using Microsoft.ML;
 using Microsoft.ML.Data;
 using Microsoft.ML.Trainers;
-using Microsoft.ML.Trainers.LightGbm;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace PdfPigMLNetBlockClassifier.LightGbm
+namespace PdfPigMLNetBlockClassifier.LightGbmV2
 {
     public static class LightGbmModelBuilder
     {
@@ -136,41 +135,28 @@ across all the features of a model, one after another.\n");
         {
             // Data process configuration with pipeline data transformations 
             var dataProcessPipeline = mlContext.Transforms.Conversion.MapValueToKey("label", "label")
-                                      .Append(mlContext.Transforms.Concatenate("Features", new[] { "charsCount", "pctNumericChars", "pctAlphabeticalChars",
-                                                                                                   "pctSymbolicChars", "pctBulletChars", "deltaToHeight",
-                                                                                                   "pathsCount", "pctBezierPaths", "pctHorPaths",
-                                                                                                   "pctVertPaths", "pctOblPaths", "imagesCount",
-                                                                                                   "imageAvgProportion" }));
+                                      .Append(mlContext.Transforms.Concatenate("Features", 
+                                      new[] 
+                                      {
+                                          "blockAspectRatio", "charsCount",
+                                          "wordsCount", "linesCount",
+                                          "pctNumericChars", "pctAlphabeticalChars",
+                                          "pctSymbolicChars", "pctBulletChars",
+                                          "deltaToHeight", "pathsCount",
+                                          "pctBezierPaths", "pctHorPaths",
+                                          "pctVertPaths", "pctOblPaths",
+                                          "imagesCount", "imageAvgProportion",
+                                          "bestNormEditDistance"
+                                      }));
 
             // Set the training algorithm 
-            var trainer = mlContext.MulticlassClassification.Trainers.LightGbm(new LightGbmMulticlassTrainer.Options()
-            {
-                NumberOfIterations = 150,
-                LearningRate = 0.1158737f,
-                NumberOfLeaves = 39,
-                MinimumExampleCountPerLeaf = 50,
-                UseCategoricalSplit = true,
-                HandleMissingValue = false,
-                MinimumExampleCountPerGroup = 50,
-                MaximumCategoricalSplitPointCount = 32,
-                CategoricalSmoothing = 10,
-                L2CategoricalRegularization = 1,
-                UseSoftmax = false,
-                Booster = new GradientBooster.Options()
-                {
-                    L2Regularization = 0,
-                    L1Regularization = 0
-                },
-                LabelColumnName = "label",
-                FeatureColumnName = "Features",
-                //UnbalancedSets = true,              // added by BobLd
-            }).Append(mlContext.Transforms.Conversion.MapKeyToValue("PredictedLabel", "PredictedLabel"));
-
+            var trainer = mlContext.MulticlassClassification.Trainers.LightGbm(labelColumnName: "label", featureColumnName: "Features")
+                                      .Append(mlContext.Transforms.Conversion.MapKeyToValue("PredictedLabel", "PredictedLabel"));
             var trainingPipeline = dataProcessPipeline.Append(trainer);
 
             return trainingPipeline;
         }
-        
+
         private static ITransformer TrainModel(MLContext mlContext, IDataView trainingDataView, IEstimator<ITransformer> trainingPipeline)
         {
             Console.WriteLine("=============== Training  model ===============");

@@ -8,15 +8,16 @@ using System.Xml;
 using System.Xml.Serialization;
 using UglyToad.PdfPig;
 using UglyToad.PdfPig.Core;
+using UglyToad.PdfPig.DocumentLayoutAnalysis;
 using UglyToad.PdfPig.DocumentLayoutAnalysis.Export.PAGE;
+using UglyToad.PdfPig.Outline;
 using static UglyToad.PdfPig.DocumentLayoutAnalysis.Export.PAGE.PageXmlDocument;
 
-namespace PdfPigMLNetBlockClassifier.Data
+namespace PdfPigMLNetBlockClassifier.Data.v2
 {
     public static class DataGenerator
     {
         public static readonly string OutputFolderPath = @"../../../data";
-        private static readonly string header = "charsCount,pctNumericChars,pctAlphabeticalChars,pctSymbolicChars,pctBulletChars,deltaToHeight,pathsCount,pctBezierPaths,pctHorPaths,pctVertPaths,pctOblPaths,imagesCount,imageAvgProportion,label";
 
         /// <summary>
         /// Generate a csv file of features. You will need the pdf documents and the ground truths in PAGE xml format.
@@ -44,6 +45,7 @@ namespace PdfPigMLNetBlockClassifier.Data
             var indexesSelected = GenerateRandom(numberOfPdfDocs, 0, pdfFileLinks.Length);
 
             Parallel.ForEach(indexesSelected, index =>
+            //foreach (var index in indexesSelected)
             {
                 var pdfFile = pdfFileLinks[index];
                 string fileName = pdfFile.Name;
@@ -70,6 +72,13 @@ namespace PdfPigMLNetBlockClassifier.Data
 
                     using (var doc = PdfDocument.Open(pdfFile.FullName))
                     {
+                        var hasBookmarks = doc.TryGetBookmarks(out Bookmarks bookmarks);
+                        List<DocumentBookmarkNode> bookmarksNodes = null;
+                        if (hasBookmarks) bookmarksNodes = bookmarks.GetNodes()
+                                .Where(b => b is DocumentBookmarkNode)
+                                .Select(b => b as DocumentBookmarkNode)
+                                .Cast<DocumentBookmarkNode>().ToList();
+
                         // Checks if this pdf document looks to be valid
                         if ((pagesNumbers.Max() + 1) > doc.NumberOfPages)
                         {
@@ -84,8 +93,17 @@ namespace PdfPigMLNetBlockClassifier.Data
                         {
                             if (!isValidDocument) break;
 
-                            int pageNo = ParseXmlFileName(pageXmlLink.Name);
+                            int pageNo = ParseXmlFileName(pageXmlLink.Name); // base 0
+
+                            List<DocumentBookmarkNode> pageBookmarksNodes = null;
+                            if (hasBookmarks)
+                            {
+                                pageBookmarksNodes = bookmarksNodes.Where(b => b.PageNumber == pageNo + 1).ToList();
+                            }
+
                             var page = doc.GetPage(pageNo + 1);
+
+                            var avgPageFontHeight = page.Letters.Select(l => l.GlyphRectangle.Height).Average();
 
                             if (page.Rotation.Value != 0)
                             {
@@ -105,10 +123,10 @@ namespace PdfPigMLNetBlockClassifier.Data
                                 int category = -1;
                                 PdfRectangle bbox = new PdfRectangle();
 
-                                if (block is PageXmlTextRegion textBlock)
+                                if (block is PageXmlTextRegion pageTextRegion)
                                 {
-                                    bbox = ParsePageXmlCoord(textBlock.Coords.Points, page.Height);
-                                    switch (textBlock.Type)
+                                    bbox = ParsePageXmlCoord(pageTextRegion.Coords.Points, page.Height);
+                                    switch (pageTextRegion.Type)
                                     {
                                         case PageXmlTextSimpleType.Paragraph:
                                             category = 0;
@@ -148,10 +166,22 @@ namespace PdfPigMLNetBlockClassifier.Data
                                     throw new ArgumentException("Unknown region type");
                                 }
 
+                                TextBlock textBlock = null;
                                 var letters = FeatureHelper.GetLettersInside(bbox, page.Letters).ToList();
+                                if (letters.Any())
+                                {
+                                    var words = FeatureHelper.GetWords(letters);
+                                    var lines = FeatureHelper.GetLines(words);
+                                    if (lines != null && lines.Count > 0)
+                                    {
+                                        textBlock = new TextBlock(lines);
+                                    }
+                                }
+                    
                                 var paths = FeatureHelper.GetPathsInside(bbox, page.ExperimentalAccess.Paths).ToList();
                                 var images = FeatureHelper.GetImagesInside(bbox, page.GetImages());
-                                var f = FeatureHelper.GetFeatures(page, bbox, letters, paths, images);
+                                var f = FeatureHelper.GetFeatures(textBlock, paths, images,
+                                    avgPageFontHeight, bbox.Area, pageBookmarksNodes);
 
                                 if (category == -1)
                                 {
@@ -174,7 +204,8 @@ namespace PdfPigMLNetBlockClassifier.Data
                             throw new ArgumentException("features and categories don't have the same size");
                         }
 
-                        foreach (var line in localFeatures.Zip(localCategories, (f, c) => string.Join(",", f) + "," + c))
+                        foreach (var line in localFeatures.Zip(localCategories,
+                            (f, c) => string.Join(",", f).Replace(float.NaN.ToString(), "") + "," + c))
                         {
                             data.Add(line);
                         }
@@ -193,7 +224,7 @@ namespace PdfPigMLNetBlockClassifier.Data
                 Console.WriteLine(done++);
             });
 
-            List<string> csv = new List<string>() { header };
+            List<string> csv = new List<string>() { FeatureHelper.Header };
             csv.AddRange(data);
             File.WriteAllLines(outputFullPath, csv);
             File.WriteAllLines(outputErrorFullPath, invalidPdfs);
