@@ -76,7 +76,7 @@ across all the features of a model, one after another. - [Source]( https://docs.
 |**pctVertPaths**|% of vertical paths|-0.001448   |    8.139E-05|
 |**pctOblPaths**|% of oblique paths|-0.0001883   |   1.734E-05|
 |**imagesCount**|Images count|-9.692E-05   |   1.127E-05|
-|**pctBezierPaths**|% of Bezier curve paths||6.212E-22   |    1.352E-05|
+|**pctBezierPaths**|% of Bezier curve paths|6.212E-22   |    1.352E-05|
 
 ### Macro Accuracy 
 
