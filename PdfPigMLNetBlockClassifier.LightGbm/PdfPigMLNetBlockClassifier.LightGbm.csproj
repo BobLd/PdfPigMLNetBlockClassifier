@@ -5,8 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.ML.LightGBM" Version="1.4.0" />
-    <PackageReference Include="PdfPig" Version="0.1.0" />
+    <PackageReference Include="Microsoft.ML.LightGBM" Version="1.5.0-preview" />
+    <PackageReference Include="PdfPig" Version="0.1.1-alpha001" />
   </ItemGroup>
 
   <ItemGroup>

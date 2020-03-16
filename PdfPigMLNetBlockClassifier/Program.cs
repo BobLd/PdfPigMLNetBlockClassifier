@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UglyToad.PdfPig;
 using UglyToad.PdfPig.DocumentLayoutAnalysis.PageSegmenter;
-using UglyToad.PdfPig.DocumentLayoutAnalysis.ReadingOrderDetector;
 using UglyToad.PdfPig.DocumentLayoutAnalysis.WordExtractor;
 using UglyToad.PdfPig.Outline;
 
@@ -37,8 +36,8 @@ namespace PdfPigMLNetBlockClassifier
             // 4. Load the trained classifier
             LightGbmBlockClassifier lightGbmBlockClassifier = new LightGbmBlockClassifier(LightGbmModelBuilder.GetModelPath(MODEL_NAME));
 
-            var test = lightGbmBlockClassifier.OutputSchema["label"];
-
+            var test = lightGbmBlockClassifier.OutputSchema["label"].HasSlotNames();
+            
             NearestNeighbourWordExtractor nearestNeighbourWordExtractor = new NearestNeighbourWordExtractor();
             RecursiveXYCut recursiveXYCut = new RecursiveXYCut();
 
@@ -60,9 +59,6 @@ namespace PdfPigMLNetBlockClassifier
 
                     var words = nearestNeighbourWordExtractor.GetWords(page.Letters);
                     var blocks = recursiveXYCut.GetBlocks(words, page.Width / 3.0);
-                    //var classifiedBlocks = lightGbmBlockClassifier.Classify(page,
-                    //                                        NearestNeighbourWordExtractor.Instance,
-                    //                                        RecursiveXYCut.Instance);
 
                     foreach (var block in blocks)
                     {
