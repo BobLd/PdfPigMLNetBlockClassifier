@@ -1,29 +1,36 @@
-# PdfPig ML.Net Block Classifier
+# PdfPig ML.Net Block Classifier v2
 Proof of concept of training a simple Region Classifier using [PdfPig](https://github.com/UglyToad/PdfPig) and [ML.NET](https://github.com/dotnet/machinelearning). 
 The objective is to classify each text block in a __pdf document__ page as either __title__, __text__, __list__, __table__ and __image__.
 
 [AutoML](https://docs.microsoft.com/en-us/dotnet/machine-learning/automate-training-with-model-builder) model builder was used. The model was
 trained on a subset of the [PubLayNet](https://github.com/ibm-aur-nlp/PubLayNet#getting-data) dataset. See their license [here](https://cdla.io/permissive-1-0/).
 
+| Generation | MicroAccuracy | MacroAccuracy |
+|-----------:|:-------------:|:-------------:|
+| **v1**         | 0.937         | 0.748         |
+| **v2**         | 0.952         | 0.801         |
+
+For v1 model results, see [here](https://github.com/BobLd/PdfPigMLNetBlockClassifier/blob/master/PdfPigMLNetBlockClassifier.LightGbm/README.md).
+
 # Results
 Results are based on PubLayNet's validation dataset, where the page segmentation is known. For real life use, a page segmenter will be needed (see PdfPig's [PageSegmenters](https://github.com/UglyToad/PdfPig/tree/master/src/UglyToad.PdfPig.DocumentLayoutAnalysis/PageSegmenter)). The quality of the page segmentation  will impact the results.
 ## Metrics for multi-class classification model
 ```
-MicroAccuracy = 0.9369, a value between 0 and 1, the closer to 1, the better
-MacroAccuracy = 0.7482, a value between 0 and 1, the closer to 1, the better
-LogLoss = 0.2092, the closer to 0, the better
+MicroAccuracy = 0.9523, a value between 0 and 1, the closer to 1, the better
+MacroAccuracy = 0.8009, a value between 0 and 1, the closer to 1, the better
+LogLoss = 3.5333, the closer to 0, the better
 
-LogLoss for class 0 (title)        = 0.2156, the closer to 0, the better
-LogLoss for class 1 (list)         = 3.1245, the closer to 0, the better
-LogLoss for class 2 (table)        = 0.3060, the closer to 0, the better
-LogLoss for class 3 (text)         = 0.1094, the closer to 0, the better
-LogLoss for class 4 (image)        = 0.2472, the closer to 0, the better
+LogLoss for class 0 (title)         = 4.6289, the closer to 0, the better
+LogLoss for class 1 (image)         = 1.849, the closer to 0, the better
+LogLoss for class 2 (text)          = 2.5834, the closer to 0, the better
+LogLoss for class 3 (list)          = 28.8412, the closer to 0, the better
+LogLoss for class 4 (table)         = 2.8326, the closer to 0, the better
 
-F1 Score for class 0 (title)       = 0.9003, a value between 0 and 1, the closer to 1, the better
-F1 Score for class 1 (list)        = 0.0213, a value between 0 and 1, the closer to 1, the better
-F1 Score for class 2 (table)       = 0.9361, a value between 0 and 1, the closer to 1, the better
-F1 Score for class 3 (text)        = 0.9593, a value between 0 and 1, the closer to 1, the better
-F1 Score for class 4 (image)       = 0.9161, a value between 0 and 1, the closer to 1, the better
+F1 Score for class 0 (title)       = 0.9305, a value between 0 and 1, the closer to 1, the better
+F1 Score for class 1 (image)       = 0.9412, a value between 0 and 1, the closer to 1, the better
+F1 Score for class 2 (text)        = 0.9691, a value between 0 and 1, the closer to 1, the better
+F1 Score for class 3 (list)        = 0.2963, a value between 0 and 1, the closer to 1, the better
+F1 Score for class 4 (table)       = 0.9611, a value between 0 and 1, the closer to 1, the better
 ```
 
 ## Confusion table
@@ -31,13 +38,13 @@ F1 Score for class 4 (image)       = 0.9161, a value between 0 and 1, the closer
           ||=======================================================
 PREDICTED ||     0 |     1 |     2 |     3 |     4 | Total | Recall
 TRUTH     ||=======================================================
-(title) 0 || 1,765 |     0 |     0 |   145 |     2 | 1,912 | 0.9231
-(list)  1 ||     1 |     3 |     2 |   273 |     0 | 279   | 0.0108
-(table) 2 ||     0 |     0 |   623 |    63 |     5 | 691   | 0.9016
-(text)  3 ||   242 |     0 |    13 | 8,709 |     1 | 8,965 | 0.9714
-(image) 4 ||     1 |     0 |     2 |     2 |    71 | 76    | 0.9342
+(title) 0 || 1,848 |     0 |    89 |     1 |     0 | 1,938 | 0.9536
+(image) 1 ||     0 |    72 |     3 |     0 |     1 | 76    | 0.9474
+(text)  2 ||   185 |     1 | 8,837 |    16 |     9 | 9,048 | 0.9767
+(list)  3 ||     1 |     0 |   225 |    52 |     2 | 280   | 0.1857
+(table) 4 ||     0 |     4 |    35 |     2 |   654 | 695   | 0.9410
           ||=======================================================
-Precision ||0.8785 |1.0000 |0.9734 |0.9475 |0.8987 |
+Precision ||0.9086 |0.9351 |0.9617 |0.7324 |0.9820 |
 ```
 
 ## Permutation Feature Importance
@@ -53,45 +60,50 @@ across all the features of a model, one after another. - [Source]( https://docs.
 
 |Feature                  | Description | Change in MicroAccuracy | 95% Confidence in the Mean Change in MicroAccuracy |
 |------------------------:|:-----------:|:-----------------------:|:--------------------------------------------------:|
-|**charsCount**           |Characters count|-0.2192 |0.0008443 |
-|**pctNumericChars**      |% of numeric characters|-0.04996 |0.0004363 |
-|**deltaToHeight**        |Average delta to average page glyph height|-0.04155 |0.000428|
-|**pctBulletChars**       |% of bullet characters|-0.01571 |0.0004034|
-|**pctAlphabeticalChars** |% of alphabetical characters|-0.012 |0.0003245 |
-|**pctSymbolicChars**     |% of symbolic characters|-0.01187 |0.0004204 |
-|**pathsCount**           |Paths count|-0.01089 |0.0002144 |
-|**pctHorPaths**          |% of horizontal paths|-0.002695 |0.0001318 |
-|**imageAvgProportion**   |Average area covered by images|-0.001895 |0.00003909 |
-|**pctVertPaths**         |% of vertical paths|-0.001403 |0.0001069 |
-|**pctOblPaths**          |% of oblique paths|-0.0005032 |0.00003612 |
-|**pctBezierPaths**       |% of Bezier curve paths|-0.00007828 |0.00001563 |
-|**imagesCount**          |Images count|-0.00002796 |0.00002768 |
+|**wordsCount**| Words count |-0.1144 	|0.0008237|
+|**charsCount**| Characters count |-0.09849|0.0009115|
+|**linesCount**| Lines count |-0.04255  |0.0005726|
+|**blockAspectRatio**|Ratio between the block's width and height|-0.04159|0.0005134|
+|**bestNormEditDistance**|Minimum edit distance between bookmark title and block text|-0.04016    |    0.0006307|
+|**deltaToHeight**|Average delta to average page glyph height|-0.03689   |     0.0003823|
+|**pctNumericChars**|% of numeric characters|-0.03375   |     0.0005174|
+|**pctSymbolicChars**|% of symbolic characters|-0.01035   |     0.000358|
+|**pctAlphabeticalChars**|% of alphabetical characters|  -0.00859    |    0.0003075|
+|**pctBulletChars**|% of bullet characters|-0.004071   |    0.0002063|
+|**pathsCount**|Paths count|-0.003661   |    0.0001184|
+|**pctHorPaths**|% of horizontal paths|-0.003431   |    0.0001309|
+|**imageAvgProportion**|Average area covered by images|-0.001684     |  4.68E-05|
+|**pctVertPaths**|% of vertical paths|-0.001448   |    8.139E-05|
+|**pctOblPaths**|% of oblique paths|-0.0001883   |   1.734E-05|
+|**imagesCount**|Images count|-9.692E-05   |   1.127E-05|
+|**pctBezierPaths**|% of Bezier curve paths|6.212E-22   |    1.352E-05|
 
 ### Macro Accuracy 
 
 |Feature                  | Description | Change in MacroAccuracy | 95% Confidence in the Mean Change in MacroAccuracy |
 |------------------------:|:-----------:|:-----------------------:|:--------------------------------------------------:|
-|**charsCount**           |Characters count|-0.1906 |0.001906|
-|**pathsCount**           |Paths count|-0.07355 |0.001211|
-|**pctNumericChars**      |% of numeric characters|-0.06516 |0.0008356|
-|**deltaToHeight**        |Average delta to average page glyph height|-0.05476 |0.001333|
-|**pctOblPaths**          |% of oblique paths|-0.01097 |0.0002006|
-|**pctAlphabeticalChars** |% of alphabetical characters|-0.009334 |0.001237|
-|**imageAvgProportion**   |Average area covered by images|-0.00874 |0.0001771|
-|**pctVertPaths**         |% of vertical paths|-0.005001 |0.0003568|
-|**pctHorPaths**          |% of horizontal paths|-0.004718 |0.0004244|
-|**pctSymbolicChars**     |% of symbolic characters|-0.001522 |0.0008552|
-|**pctBulletChars**       |% of bullet characters|0.0009088 |0.0007747|
-|**pctBezierPaths**       |% of Bezier curve paths|-0.0003737 |0.00005705|
-|**imagesCount**          |Images count|-0.00003805 |0.00003434|
+|**charsCount**|Characters count|      		-0.1339 |		0.002263|
+|**linesCount**| Lines count |      		-0.08378   |     0.0009925|
+|**deltaToHeight**|Average delta to average page glyph height|   		-0.06461    |    0.001223|
+|**blockAspectRatio**|Ratio between the block's width and height|        -0.05896     |   0.001163|
+|**bestNormEditDistance**|Minimum edit distance between bookmark title and block text|    -0.05039     |   0.001419|
+|**pctNumericChars**|% of numeric characters| 		-0.0475 	|	0.001258|
+|**pathsCount**|Paths count|      		-0.0252 	|	0.000614|
+|**wordsCount**|Words count|      		-0.01651   |     0.001655|
+|**pctSymbolicChars**|% of symbolic characters|        -0.01166      |  0.001505|
+|**pctHorPaths**|% of horizontal paths|     		-0.00984 |       0.0003186|
+|**pctVertPaths**|% of vertical paths|    		-0.008558  |     0.0002925|
+|**pctAlphabeticalChars**|% of alphabetical characters|    -0.006882    |   0.0009913|
+|**imageAvgProportion**|Average area covered by images|      -0.006148     |  0.0001146|
+|**pctBulletChars**|% of bullet characters|  		-0.005319  |     0.0008375|
+|**pctOblPaths**|% of oblique paths|     		-0.002747   |    6.657E-05|
+|**imagesCount**|Images count|     		-0.00268    |    3.903E-05|
+|**pctBezierPaths**|% of Bezier curve paths|  		-4.078E-05  |    5.263E-05|
 
 # TO DO
 ## Features
 - Add a [decoration](https://github.com/UglyToad/PdfPig/blob/master/src/UglyToad.PdfPig.DocumentLayoutAnalysis/DecorationTextBlockClassifier.cs) score/flag
-- Add block's number of line, [cf.](http://www.cs.rug.nl/~aiellom/publications/ijdar.pdf)
-- Add block's aspect ratio: the ratio between width and height of the bounding box, [cf.](http://www.cs.rug.nl/~aiellom/publications/ijdar.pdf)
 - Add block's area ratio: the ratio between block area and the page area, [cf.](http://www.cs.rug.nl/~aiellom/publications/ijdar.pdf)
 - Add block's font style: an enumerated type, with possible values: regular, bold, italic, underline, [cf.](http://www.cs.rug.nl/~aiellom/publications/ijdar.pdf)
-- Use [bookmarks](https://github.com/UglyToad/PdfPig/blob/master/src/UglyToad.PdfPig/Outline/BookmarksProvider.cs) when available with minimum edit distance score
 - Add % sparse lines in a block, for better table recognition [cf.](https://clgiles.ist.psu.edu/pubs/CIKM2008-table-boundaries.pdf)
 - Font color distance from most common color
